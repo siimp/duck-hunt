@@ -8,7 +8,7 @@ function update(tick) {
 
 function draw(tick) {
     CONTEXT.ctx.clearRect(0, 0, CONTEXT.canvas.width, CONTEXT.canvas.height);
-    renderGame()
+    renderGame(tick)
 }
 
 let tick = 0;

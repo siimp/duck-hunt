@@ -1,6 +1,16 @@
-function renderGame() {
-    drawSprite('left_3.png', CONTEXT.game.bird.x, CONTEXT.game.bird.y)
-    drawSprite('dog.png', CONTEXT.game.dog.x, CONTEXT.game.dog.y)
+function renderGame(tick) {
+    drawBird(tick);
+    drawSprite('dog.png', CONTEXT.game.dog.x, CONTEXT.game.dog.y);
+}
+
+let animationFrame = 1;
+function drawBird(tick) {
+    let sprite = CONTEXT.game.bird.state.toLowerCase();
+    drawSprite(`${sprite}_${animationFrame}.png`, CONTEXT.game.bird.x, CONTEXT.game.bird.y);
+    
+    if (tick % 10 === 0) {
+        animationFrame = ++animationFrame % 3 + 1;
+    }
 }
 
 function drawSprite(spriteName, x, y) {
