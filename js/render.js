@@ -1,5 +1,6 @@
 function renderGame() {
     drawSprite('left_3.png', CONTEXT.game.bird.x, CONTEXT.game.bird.y)
+    drawSprite('dog.png', CONTEXT.game.dog.x, CONTEXT.game.dog.y)
 }
 
 function drawSprite(spriteName, x, y) {

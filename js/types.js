@@ -1,8 +1,17 @@
+const GameState = {
+    START: 'START',
+    BIRD_FLYING: 'BIRD_FLYING',
+    BIRD_ESCAPED: 'BIRD_ESCAPED',
+    BIRD_CAUGHT: 'BIRD_CAUGHT'
+}
+
 class Game {
-    constructor() {
+    constructor(worldWidth, worldHeight) {
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
+        this.state = GameState.START;
         this.dog = new Dog();
         this.bird = new Bird();
-        console.log('new game created');
     }
 }
 
@@ -17,7 +26,6 @@ class Entity {
 const BirdState = {
     HIDDEN: 'HIDDEN',
     UP: 'UP',
-    DOWN: 'DOWN',
     LEFT: 'LEFT',
     RIGHT: 'RIGHT',
     UP_LEFT: 'UP_LEFT',
@@ -27,7 +35,7 @@ const BirdState = {
 
 class Bird extends Entity {
     constructor() {
-        super()
+        super();
         this.state = BirdState.HIDDEN;
     }
 }
@@ -42,7 +50,7 @@ const DogState = {
 class Dog extends Entity {
 
     constructor() {
-        super()
+        super();
         this.state = DogState.HIDDEN;
     }
 
