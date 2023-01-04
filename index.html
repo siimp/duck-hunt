@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Duck Hunt</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="gameCanvas" width="1" height="1"></canvas>
+    <script src="js/types.js"></script>
+    <script>
+        // resize canvas
+        const gameCanvas = document.getElementById('gameCanvas');
+        gameCanvas.width = window.innerWidth;
+        gameCanvas.height = window.innerHeight;
+
+        // main context
+        const CONTEXT = {
+            canvas: gameCanvas,
+            ctx: gameCanvas.getContext("2d"),
+            assetsLoaded: /*promise*/ null,
+            game: new Game()
+        }
+    </script>
+    <script src="js/utils.js"></script>
+    <script src="js/assets.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/logic.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Testing</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <canvas id="gameCanvas" width="1" height="1"></canvas>
+    <script>
+        // resize canvas
+        const gameCanvas = document.getElementById('gameCanvas');
+        gameCanvas.width = window.innerWidth;
+        gameCanvas.height = window.innerHeight;
+
+        // main context
+        const CONTEXT = {
+            canvas: gameCanvas,
+            ctx: gameCanvas.getContext("2d"),
+            assetsLoaded: /*promise*/ null
+        }
+    </script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/assets.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        cancelAnimationFrame(CONTEXT.animationRequestId)
+        let testCounter = 1;
+        const MAX_COUNTER = 3;
+        let testStart;
+
+        function update(timestamp) {
+            if (testStart === undefined) {
+                testStart = timestamp
+            }
+
+            CONTEXT.ctx.clearRect(0, 0, CONTEXT.canvas.width, CONTEXT.canvas.height);
+            const image = "left_" + testCounter + ".png"
+            
+            if (timestamp - testStart > 150) {
+                if (testCounter === MAX_COUNTER) {
+                    testCounter = 1
+                } else {
+                    testCounter++
+                }
+                testStart = timestamp
+            }
+            const s = CONTEXT.spritesheetData[image]
+            CONTEXT.ctx.drawImage(CONTEXT.spritesheet, s.x, s.y, s.w, s.h, 400, 200, 50, 50);
+        }
+
+        function animate(timestamp) {
+            update(timestamp);
+            requestAnimationFrame(animate);
+        }
+
+        document.onclick = () => {
+            console.log('click')
+            playAudio('../audio/duck-drop.mp3')
+        }
+
+        CONTEXT.assetsLoaded.then(() => {
+            CONTEXT.animationRequestId = requestAnimationFrame(animate);
+        });
+    </script>
+</body>
+</html>
