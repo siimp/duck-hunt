@@ -9,26 +9,46 @@ const BIRD_FLYING_STATES = [
 const BIRD_FLYING_SPEED = 2;
 
 function updateGameLogic(tick) {
+    if (CONTEXT.game.state === GameState.STOPPED) {
+        return;
+    } 
+    
     if (CONTEXT.game.state === GameState.START) {
         startGame();
     } else if (CONTEXT.game.state === GameState.BIRD_ESCAPED) {
-        startGame();
+        stopGame();
+        setTimeout(() => {
+            startGame();
+        }, Math.random() * 5000);
     }
-    
-    if (tick === 0 && Math.random() > 0.5) {
-        const stateIndex = Math.floor(Math.random() * 5);
-        CONTEXT.game.bird.state = BIRD_FLYING_STATES[stateIndex];
+
+    if (CONTEXT.game.state === GameState.BIRD_FLYING) {
+        if (tick === 0 && Math.random() > 0.5) {
+            const newState = BIRD_FLYING_STATES[Math.floor(Math.random() * 5)];
+            if (newState !== CONTEXT.game.bird.state) {
+                playAudio('../audio/duck-flapping.mp3', false);
+                CONTEXT.game.bird.state = newState;
+            }
+        }
+        
+        moveBird();
+        checkEscape();
     }
-    
-    moveBird();
-    checkEscape();
 }
 
 function startGame() {
     CONTEXT.game.bird.state = BirdState.UP;
     CONTEXT.game.bird.y = CONTEXT.game.worldHeight;
-    CONTEXT.game.bird.x = CONTEXT.game.worldWidth / 2;
+    CONTEXT.game.bird.x = Math.random() * CONTEXT.game.worldWidth;
     CONTEXT.game.state = GameState.BIRD_FLYING;
+    playAudio('../audio/duck-quack.mp3');
+}
+
+function stopGame() {
+    CONTEXT.game.state = GameState.STOPPED;
+    CONTEXT.game.bird.state = BirdState.HIDDEN;
+    CONTEXT.game.dog.state = DogState.HIDDEN;
+    playAudio('../audio/laugh.mp3');
 }
 
 function moveBird() {

@@ -1,5 +1,8 @@
 function renderGame(tick) {
-    drawBird(tick);
+    if (CONTEXT.game.bird.state !== BirdState.HIDDEN) {
+        drawBird(tick);
+    }
+    
     drawSprite('dog.png', CONTEXT.game.dog.x, CONTEXT.game.dog.y);
 }
 

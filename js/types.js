@@ -1,4 +1,5 @@
 const GameState = {
+    STOPPED: 'STOPPED',
     START: 'START',
     BIRD_FLYING: 'BIRD_FLYING',
     BIRD_ESCAPED: 'BIRD_ESCAPED',
@@ -9,7 +10,7 @@ class Game {
     constructor(worldWidth, worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        this.state = GameState.START;
+        this.state = GameState.STOPPED;
         this.dog = new Dog();
         this.bird = new Bird();
     }

@@ -32,3 +32,7 @@ CONTEXT.assetsLoaded.then(() => {
     console.info("assets loaded, starting animation")
     CONTEXT.animationRequestId = requestAnimationFrame(animate);
 });
+
+document.onclick = () => {
+    CONTEXT.game.state = GameState.START;
+}
