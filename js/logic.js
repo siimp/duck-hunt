@@ -100,7 +100,9 @@ function checkGroundHit() {
         CONTEXT.game.dog.y = CONTEXT.game.worldHeight - 70;
         playAudio('/audio/intro.mp3');
         setTimeout(() => {
-            startGame();
+            if (CONTEXT.game.state === GameState.BIRD_CAUGHT) {
+                startGame();
+            }
         }, 3000);
     }
 }
