@@ -12,6 +12,7 @@ const GAME_RUNNING_STATES = [
 ]
 
 const BIRD_FLYING_SPEED = 2;
+const BIRD_FALLING_SPEED = 3;
 
 function updateGameLogic(tick) {
     if (CONTEXT.game.state === GameState.STOPPED) {
@@ -79,7 +80,7 @@ function moveBird() {
         CONTEXT.game.bird.y-=BIRD_FLYING_SPEED;
         CONTEXT.game.bird.x+=BIRD_FLYING_SPEED;
     } else if (CONTEXT.game.bird.state === BirdState.FALLING) {
-        CONTEXT.game.bird.y+=BIRD_FLYING_SPEED;
+        CONTEXT.game.bird.y+=BIRD_FALLING_SPEED;
     }
 }
 
@@ -91,9 +92,16 @@ function checkEscape() {
 
 function checkGroundHit() {
     if (CONTEXT.game.state === GameState.BIRD_HIT && CONTEXT.game.bird.y >= CONTEXT.game.worldHeight) {
-        CONTEXT.game.state = GameState.BIRD_CAUGHT
-        console.log('drop')
         playAudio('/audio/duck-drop.mp3');
+        CONTEXT.game.state = GameState.BIRD_CAUGHT;
+        CONTEXT.game.bird.state = BirdState.HIDDEN;
+        CONTEXT.game.dog.state = DogState.CAUGHT;
+        CONTEXT.game.dog.x = CONTEXT.game.worldWidth / 2;
+        CONTEXT.game.dog.y = CONTEXT.game.worldHeight - 70;
+        playAudio('/audio/intro.mp3');
+        setTimeout(() => {
+            startGame();
+        }, 3000);
     }
 }
 

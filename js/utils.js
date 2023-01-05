@@ -22,7 +22,6 @@ function loadAudio(audioSrc) {
 	if (audio) {
         return audio
     }
-    console.log('new audio ', audioSrc)
     audio = new Audio(audioSrc);
     audio.preload = "auto";
     loadedAudios[audioSrc] = audio

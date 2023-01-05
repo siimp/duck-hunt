@@ -31,6 +31,11 @@ function drawBird(tick) {
 
 let dogAnimationFrame = 1;
 function drawDog(tick) {
+    if (CONTEXT.game.dog.state === DogState.CAUGHT) {
+        drawSprite(`dog_caught_bird.png`, CONTEXT.game.dog.x, CONTEXT.game.dog.y, SPRITE_SCALE + 50);
+        return;
+    }
+
     drawSprite(`dog_${dogAnimationFrame}.png`, CONTEXT.game.dog.x, CONTEXT.game.dog.y, SPRITE_SCALE + 50);
     
     if (tick % 5 === 0) {
