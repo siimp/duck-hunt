@@ -1,8 +1,11 @@
 const GameState = {
+    READY: 'READY',
+    STARTED: 'STARTED',
     STOPPED: 'STOPPED',
-    START: 'START',
     BIRD_FLYING: 'BIRD_FLYING',
+    BIRD_FLYING_SHOT_TAKEN: 'BIRD_FLYING_SHOT_TAKEN',
     BIRD_ESCAPED: 'BIRD_ESCAPED',
+    BIRD_HIT: 'BIRD_HIT',
     BIRD_CAUGHT: 'BIRD_CAUGHT'
 }
 
@@ -10,7 +13,7 @@ class Game {
     constructor(worldWidth, worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        this.state = GameState.STOPPED;
+        this.state = GameState.READY;
         this.dog = new Dog();
         this.bird = new Bird();
     }
@@ -31,7 +34,8 @@ const BirdState = {
     RIGHT: 'RIGHT',
     UP_LEFT: 'UP_LEFT',
     UP_RIGHT: 'UP_RIGHT',
-    DEAD: 'DEAD'
+    HIT: 'HIT',
+    FALLING: 'FALLING'
 }
 
 class Bird extends Entity {

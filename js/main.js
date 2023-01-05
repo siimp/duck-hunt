@@ -1,5 +1,3 @@
-const SPRITE_SCALE = 50;
-
 let start;
 
 function update(tick) {
@@ -33,6 +31,22 @@ CONTEXT.assetsLoaded.then(() => {
     CONTEXT.animationRequestId = requestAnimationFrame(animate);
 });
 
-document.onclick = () => {
-    CONTEXT.game.state = GameState.START;
+
+const cursorGun = document.getElementById("cursor-gun");
+let mousePositionX;
+let mousePositionY;
+function cursorGunMoveListener(e) {
+    mousePositionX = e.pageX - window.pageXOffset;
+	mousePositionY = e.pageY - window.pageYOffset;
+
+    cursorGun.style.marginLeft = mousePositionX + 'px';
+	cursorGun.style.marginTop = mousePositionY + 'px';
 }
+document.addEventListener("mousemove", cursorGunMoveListener);
+
+function gameStartClickListener() {
+    if (CONTEXT.game.state === GameState.READY) {
+        CONTEXT.game.state = GameState.STARTED;
+    }
+}
+document.addEventListener("click", gameStartClickListener);

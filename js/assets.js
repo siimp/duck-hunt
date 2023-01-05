@@ -3,11 +3,11 @@ CONTEXT.assetsLoaded = new Promise((resolve, reject) => {
     assetsLoaded = resolve
 });
 
-const spritesheetPromise = loadImage('/spritesheet/image.png');
-const spritesheetJsonPromise = loadJson('/spritesheet/data.json');
+const spritesheetPromise = loadImage('/spritesheet/spritesheet.png');
+const spritesheetJsonPromise = loadJson('/spritesheet/spritesheet.json');
 
 // load audios
-['intro', 'shot', 'laugh', 'duck-flapping'].forEach(audioName => {
+['intro', 'shot', 'laugh', 'duck-flapping', 'intro', 'duck-quack', 'duck-falling', 'duck-drop'].forEach(audioName => {
     loadAudio('/audio/' + audioName + '.mp3')
 });
 
