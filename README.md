@@ -1,7 +1,7 @@
 # Duck Hunt
 
 ```
-npm install -g static
+npm install -g node-static
 static
 ```
 
